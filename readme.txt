@@ -44,6 +44,8 @@ Talking to classmates about class material, assignment requirements, etc. is a g
 
 5. What online resources did you consult when completing this assignment? (list specific URLs, describe queries to Generative AI, or use of AI-based code completion)
 https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Organizing
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents
+https://www.w3schools.com/css/css_font_google.asp
 
 
 6. What classmates or other individuals did you consult as part of this assignment? What did you discuss?

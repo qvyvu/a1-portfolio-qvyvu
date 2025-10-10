@@ -1,7 +1,10 @@
 /* || GENERAL STYLES || */
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Playpen Sans", cursive;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -12,6 +15,10 @@ h1,
 h2,
 h3,
 h4 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
     margin: 0 0 15px 0;
     font-weight: normal;
 }
