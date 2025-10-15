@@ -1,14 +1,192 @@
 /* || GENERAL STYLES || */
 
+/* make sizing easier to manage (padding included in width) */
+*, *::before, *::after { box-sizing: border-box; }
+
+.frame {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+nav {
+    justify-self: center;
+    background: white;
+    margin: 0 auto;
+    width: auto;
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%); /* center horizontally */
+    z-index: 2000;          /* keep nav above decorative elements */
+    padding: 8px;
+    border-radius: 50px;
+    border: 1px solid #e6e6e6; /* modern thin gray border */
+    color: black;
+    display: flex;           /* arrange logo + links horizontally */
+    align-items: center;     /* vertically center the logo + links */
+}
+
+/* link styling: black default, blue on hover, no underline */
+nav a {
+    display: inline-block;
+    padding: 4px 12px;
+    text-decoration: none;
+    color: #000;
+    transition: color 180ms ease-in-out;
+}
+
+nav a:hover,
+nav a:focus {
+    color: #1e90ff; /* blue on hover */
+    text-decoration: none;
+}
+
+nav img {
+    display: inline-block; /* keep logo on same line */
+}
+
 body {
-    font-family: "Playpen Sans", cursive;
+    padding-top: 50px;
     font-optical-sizing: auto;
-    font-weight: 100;
     font-style: normal;
-    margin: 0;
-    padding: 0;
     background-color: #f4f4f4;
-    color: #333;
+}
+
+/* New: vertical, full-width, borderless nav on small screens */
+@media (max-width: 600px) {
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 0;    /* remove rounded corners */
+        box-shadow: none;    /* remove shadow */
+        border-color: transparent; /* remove border */
+        display: flex;
+        flex-direction: column; /* stack links vertically */
+        align-items: stretch;   /* full width items */
+        gap: 8px;
+        background: white;      /* keep background solid */
+        border-bottom: 1px solid #ddd; /* subtle modern grey border */
+    }
+
+    .nav-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .nav-top .nav-logo { margin: 0; }
+    /* ensure nav-links stack below nav-top */
+    .nav-links { order: 2; }
+    .nav-top { order: 1; }
+
+    nav a {
+        padding: 12px 14px;
+        display: block;
+        border-radius: 6px;     /* subtle tap target rounding */
+        background: transparent; /* no borders */
+        text-align: left;
+    }
+    
+    /* ensure logo stays visible and aligned left */
+    nav a img { display: inline-block; vertical-align: middle; }
+
+    /* nav toggle button */
+    .nav-toggle {
+        background: transparent;
+        border: none;
+        padding: 8px;
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .nav-toggle .hamburger {
+        width: 22px;
+        height: 2px;
+        background: #333;
+        position: relative;
+    }
+    .nav-toggle .hamburger::before,
+    .nav-toggle .hamburger::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0;
+        height: 2px;
+        background: #333;
+    }
+    .nav-toggle .hamburger::before { top: -7px; }
+    .nav-toggle .hamburger::after  { top: 7px; }
+
+    /* Hamburger animation: smooth transition and X state when nav.open */
+    .nav-toggle .hamburger,
+    .nav-toggle .hamburger::before,
+    .nav-toggle .hamburger::after {
+        transition: transform 220ms ease, top 220ms ease, opacity 220ms ease, background-color 220ms ease;
+        transform-origin: center;
+        will-change: transform, top, opacity;
+    }
+
+    /* Open state: hide middle bar and rotate top/bottom into an X */
+    nav.open .nav-toggle .hamburger { background: transparent; }
+    nav.open .nav-toggle .hamburger::before {
+        top: 0; /* move to center */
+        transform: rotate(45deg);
+    }
+    nav.open .nav-toggle .hamburger::after {
+        top: 0; /* move to center */
+        transform: rotate(-45deg);
+    }
+
+    /* collapsed state: hide the nav links container by default */
+    .nav-links { display: none; }
+    nav.open .nav-links { display: flex; flex-direction: column; gap: 8px; }
+}
+
+/* Desktop: ensure logo and links stay on one line when nav is expanded */
+@media (min-width: 601px) {
+    nav {
+        display: flex;
+        flex-direction: row; /* ensure children lay out horizontally */
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: nowrap; /* prevent children from wrapping to next line */
+    }
+    .nav-toggle { display: none !important; } /* hide hamburger on desktop */
+    .nav-top { display: flex; align-items: center; gap: 12px; order: 0; flex: 0 0 auto; }
+    .nav-links { display: flex; flex-direction: row; gap: 28px; align-items: center; order: 1; flex: 0 0 auto; }
+    .nav-links a { display: inline-block; white-space: nowrap; }
+}
+
+/* Forceful desktop fallback: ensure a single-row nav and inline logo+links
+   This block uses stronger rules to override earlier/cascading styles. */
+@media (min-width: 601px) {
+    nav {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 32px !important;
+        flex-wrap: nowrap !important;
+        width: auto !important;
+    }
+    nav > .nav-top, nav > .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+    }
+    .nav-toggle { display: none !important; }
+    .nav-top .nav-logo img { vertical-align: middle !important; display: inline-block !important; }
 }
 
 h1,
@@ -36,8 +214,48 @@ blockquote {
     font-style: italic;
 }
 
-/* || UTILITIES || */
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    background-color: transparent;
+    width: 50vw; /* responsive width */
+    aspect-ratio: 6/4; /* maintain 6:4 aspect ratio */
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    margin: 50px 100px 50px auto; /* center the flip card and add bottom margin */
+}
 
-/* SITEWIDE */
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
 
-/* || STORE PAGES || */
+/* Flip is now triggered by the .is-flipped class (click/tap/keyboard) */
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+}

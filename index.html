@@ -8,43 +8,106 @@ EMAIL: quynhvyv@uci.edu
 
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Vy Vu">
-  <meta name="description" content="jewelry website">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
    <!-- you would link to an external stylesheet here! -->
     <link rel="stylesheet" href="index.css">
-    
-   <!-- you would also link to Bootstrap here! -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
-    
+   <!-- you would also link to Bootstrap here! -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
   <title>vvjewelz</title>
 </head>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-
 <body>
-  <h1>welcome to vvjewelz</h1>
-
   <header>
-    <img src="images/logo.png" alt="vvjewelz logo" width="200">
-
-    <nav>
-      <a href="index.html">home</a> |
-      <a href="about.html">about</a> |
-      <a href="products.html">products</a> |
-    </nav>
+    <div>
+      <nav>
+        <div class="nav-top">
+          <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="vvjewelz logo" width="30"></a>
+          <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation">
+            <span class="hamburger"></span>
+          </button>
+        </div>
+        <div id="nav-links" class="nav-links">
+          <a href="index.html">home</a>
+          <a href="about.html">about</a>
+          <a href="products.html">products</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <footer>
-    <p>© 2024 vvjewelz</p>
-    <p>contact me here!</p>
-  </footer>
+  <div class="frame">
+    <h1>welcome to vvjewelz  ᡣ𐭩 •｡ꪆৎ ˚⋅</h1>
 
-  <p>
-    <a href="http://validator.w3.org/check?uri=referer">
-       W3C validator
-    </a>
-  </p>
+  <div class="flip-card" tabindex="0" role="button" aria-pressed="false">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="images/front_id.png" alt="Craft Girly ID Card" style="width:100%;height:100%;">
+        </div>
+        <div class="flip-card-back">
+          <img src="images/back_id.png" alt="Background of Vy" style="width:100%;height:100%;">
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2024 vvjewelz</p>
+      <p>contact me here!</p>
+    </footer>
+
+    <p>
+      <a href="http://validator.w3.org/check?uri=referer">
+         W3C validator
+      </a>
+    </p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script>
+    // small hamburger toggle for mobile nav
+    (function(){
+      var btn = document.querySelector('.nav-toggle');
+      var nav = document.querySelector('nav');
+      var links = document.getElementById('nav-links');
+      if(!btn || !nav || !links) return;
+      btn.addEventListener('click', function(){
+        var isOpen = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+        btn.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      });
+    })();
+  </script>
+
+  <script>
+    // Make flip-card toggle on click/tap and keyboard (Enter/Space)
+    (function(){
+      var cards = document.querySelectorAll('.flip-card');
+      if(!cards.length) return;
+      cards.forEach(function(card){
+        card.addEventListener('click', function(e){
+          card.classList.toggle('is-flipped');
+          card.setAttribute('aria-pressed', String(card.classList.contains('is-flipped')));
+        });
+        card.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.classList.toggle('is-flipped');
+            card.setAttribute('aria-pressed', String(card.classList.contains('is-flipped')));
+          }
+        });
+      });
+    })();
+  </script>
+
 </body>
 </html>
