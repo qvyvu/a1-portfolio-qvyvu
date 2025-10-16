@@ -42,10 +42,10 @@ Creating a more complex page layout, such as including a sidebar or navigation b
 
 
 3. Did you ignore any of the warnings or errors presented by the accessibility checker? If so, why does this not seem like an accessibility concern? If it's useful, you can consolidate your thoughts on multiple warnings/errors if the rationale is similar.
-
+No. My files ate it up.
 
 4. How long, in hours, did it take you to complete this assignment?
-20ish hours
+30ish hours including drawing/sketching. Is not perfect, but alas, I tried.
 
 
 5. What online resources did you consult when completing this assignment? (list specific URLs, describe queries to Generative AI, or use of AI-based code completion)
@@ -63,4 +63,5 @@ No one.
 
 
 7. Is there anything special we need to know in order to run your code?
+No.
 
