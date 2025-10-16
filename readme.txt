@@ -44,9 +44,8 @@ Creating a more complex page layout, such as including a sidebar or navigation b
 3. Did you ignore any of the warnings or errors presented by the accessibility checker? If so, why does this not seem like an accessibility concern? If it's useful, you can consolidate your thoughts on multiple warnings/errors if the rationale is similar.
 
 
-
 4. How long, in hours, did it take you to complete this assignment?
-
+20ish hours
 
 
 5. What online resources did you consult when completing this assignment? (list specific URLs, describe queries to Generative AI, or use of AI-based code completion)
@@ -56,10 +55,11 @@ https://www.w3schools.com/css/css_font_google.asp
 https://getbootstrap.com/docs/4.4/getting-started/introduction/ 
 https://www.w3schools.com/howto/howto_css_flip_card.asp
 https://codepen.io/julice/pen/RvdVbV
-
+Copilot AI
+https://getbootstrap.com/docs/4.0/layout/grid/
 
 6. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
-
+No one.
 
 
 7. Is there anything special we need to know in order to run your code?
