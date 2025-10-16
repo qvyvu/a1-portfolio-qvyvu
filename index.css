@@ -3,10 +3,14 @@
 /* make sizing easier to manage (padding included in width) */
 *, *::before, *::after { box-sizing: border-box; }
 
+/* ensure the viewport is fully usable and the footer can sit at the bottom */
+html, body { height: 100%; }
+
 .frame {
-    max-width: 1200px;
-    margin: 50px auto;
+    max-width: 100%;
+    margin: 50px auto 0px;
     padding: 20px;
+    flex: 1 1 auto; /* allow main content to grow and push footer down */
 }
 
 nav {
@@ -47,10 +51,113 @@ nav img {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ensure body covers viewport height */
     padding-top: 50px;
     font-optical-sizing: auto;
     font-style: normal;
     background-color: #f4f4f4;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    margin: 0 0 15px 0;
+    font-weight: normal;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+blockquote {
+    border-left: 4px solid #ccc;
+    margin: 20px 0;
+    padding-left: 15px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Full-bleed footer that doesn't overlay other content while scrolling */
+footer {
+    /* move footer out of the centered .frame and make it full viewport width */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 18px 24px;
+    background: rgb(255, 236, 239);
+    z-index: 0; /* below fixed elements like nav */
+}
+
+/* Footer content spacing and readable defaults */
+footer p { margin: 0 0 8px 0; color: #444; }
+
+/* Ensure footer on very small screens doesn't add excessive horizontal scroll */
+@media (max-width: 420px) {
+    footer { padding-left: 12px; padding-right: 12px; }
+}
+
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    background-color: transparent;
+    width: 60vw; /* responsive width */
+    aspect-ratio: 6/4; /* maintain 6:4 aspect ratio */
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    margin: 2rem auto; /* center the flip card and add bottom margin */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Flip is now triggered by the .is-flipped class (click/tap/keyboard) */
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.cropped {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    margin: 20px auto; /* center the cropped image */
 }
 
 /* New: vertical, full-width, borderless nav on small screens */
@@ -148,23 +255,14 @@ body {
     /* collapsed state: hide the nav links container by default */
     .nav-links { display: none; }
     nav.open .nav-links { display: flex; flex-direction: column; gap: 8px; }
+
+    .flip-card {
+    width: 90vw; /* responsive width */
+    margin: auto; /* center the flip card and add bottom margin */
 }
 
-/* Desktop: ensure logo and links stay on one line when nav is expanded */
-@media (min-width: 601px) {
-    nav {
-        display: flex;
-        flex-direction: row; /* ensure children lay out horizontally */
-        align-items: center;
-        justify-content: center;
-        gap: 32px;
-        flex-wrap: nowrap; /* prevent children from wrapping to next line */
-    }
-    .nav-toggle { display: none !important; } /* hide hamburger on desktop */
-    .nav-top { display: flex; align-items: center; gap: 12px; order: 0; flex: 0 0 auto; }
-    .nav-links { display: flex; flex-direction: row; gap: 28px; align-items: center; order: 1; flex: 0 0 auto; }
-    .nav-links a { display: inline-block; white-space: nowrap; }
 }
+
 
 /* Forceful desktop fallback: ensure a single-row nav and inline logo+links
    This block uses stronger rules to override earlier/cascading styles. */
@@ -187,94 +285,4 @@ body {
     }
     .nav-toggle { display: none !important; }
     .nav-top .nav-logo img { vertical-align: middle !important; display: inline-block !important; }
-}
-
-h1,
-h2,
-h3,
-h4 {
-    font-family: "Quicksand", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    margin: 0 0 15px 0;
-    font-weight: normal;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-blockquote {
-    border-left: 4px solid #ccc;
-    margin: 20px 0;
-    padding-left: 15px;
-    color: #666;
-    font-style: italic;
-}
-
-footer {
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    font-size: 0.9em;
-    text-align: left;
-    padding-left: 10rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    background-color: #ffeff8;
-}
-
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-.flip-card {
-    background-color: transparent;
-    width: 50vw; /* responsive width */
-    aspect-ratio: 6/4; /* maintain 6:4 aspect ratio */
-    perspective: 1000px; /* Remove this if you don't want the 3D effect */
-    margin: 50px 100px 50px auto; /* center the flip card and add bottom margin */
-}
-
-/* This container is needed to position the front and back side */
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
-
-/* Flip is now triggered by the .is-flipped class (click/tap/keyboard) */
-.flip-card.is-flipped .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-/* Position the front and back side */
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-}
-
-/* Style the front side (fallback if image is missing) */
-.flip-card-front {
-    background-color: #bbb;
-    color: black;
-}
-
-/* Style the back side */
-.flip-card-back {
-    background-color: dodgerblue;
-    color: white;
-    transform: rotateY(180deg);
-}
-
-.cropped {
-    width: 100%;
-    height: 150px;
-    overflow: hidden;
-    margin: 20px auto; /* center the cropped image */
 }
